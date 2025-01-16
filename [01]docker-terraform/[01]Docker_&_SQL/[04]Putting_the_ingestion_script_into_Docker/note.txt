@@ -1,0 +1,40 @@
+docker run -it \
+    -e POSTGRES_USER=root \
+    -e POSTGRES_PASSWORD=root \
+    -e POSTGRES_DB=ny_taxi \
+    -v "$(pwd)/ny_taxi:/var/lib/postgresql/data" \
+    -p 5432:5432 \
+    --name postgres \
+    --network ny_taxi \
+    postgres:13
+
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL=admin@admin.com \
+    -e PGADMIN_DEFAULT_PASSWORD=root \
+    -p 8080:80 \
+    --name pgadmin \
+    --network ny_taxi \
+    dpage/pgadmin4
+
+python3 ingest_data.py \
+    --user=root \
+    --host=localhost \
+    --port=5432 \
+    --db=ny_taxi \
+    --table=yellow_taxi_data \
+    --url="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet" \
+    --chunk=50000
+
+docker build -t taxi_ingest:v001 . 
+
+docker run -it \
+    --network ny_taxi \
+    taxi_ingest:v001 \
+    --user=root \
+    --host=postgres \
+    --port=5432 \
+    --db=ny_taxi \
+    --table=yellow_taxi_data \
+    --url="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet" \
+    --chunk=50000
+
