@@ -1,2 +1,0 @@
-- https://fauzanghaza.medium.com/virtual-machines-vs-containers-14b39df4b5b9
-- https://x.com/fauzanghaza/status/1879734437266825590

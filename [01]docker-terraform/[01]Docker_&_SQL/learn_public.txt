@@ -1,0 +1,4 @@
+- https://fauzanghaza.medium.com/virtual-machines-vs-containers-14b39df4b5b9
+- https://fauzanghaza.medium.com/efficient-data-ingestion-using-python-to-stream-large-datasets-into-postgresql-428c0ad61012
+- https://x.com/fauzanghaza/status/1879734437266825590
+- https://x.com/fauzanghaza/status/1882345833808666631
