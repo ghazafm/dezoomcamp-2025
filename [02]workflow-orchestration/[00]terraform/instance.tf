@@ -22,7 +22,7 @@ resource "aws_instance" "web" {
   }
 
   provisioner "file" {
-    source      = "docker-compose-postgres.yml"
+    source      = "compose.yml"
     destination = "/tmp/docker-compose.yml"
   }
 
